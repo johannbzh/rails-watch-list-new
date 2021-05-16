@@ -1,16 +1,74 @@
-<h1><%= @list.name %></h1>
-<%= link_to "My lists", lists_path %>
-<p><%= link_to "Delete this list", list_path(@list), method: :delete, data: {confirm: "Are you sure?"} %></p>
-<% @list.movies.each do |movie| %>
-  <li>
-    <% bookmark = Bookmark.find_by(movie: movie, list: @list) %>
-    <%= bookmark.comment %>
-    <%= movie.title %>
-    <%= image_tag movie.poster_url, alt: movie.title, width: 200 %>
-    <%= link_to "Delete this bookmark", bookmark_path(bookmark), method: :delete, data: {confirm: "Are you sure?"}  %>
+<div class="cover">
+  <div class="d-flex justify-content-between m-2">
+    <p><%= link_to "My lists", root_path, class: 'cover-link' %></p>
+    <p><%= link_to "Delete this list", list_path(@list), method: :delete, data: {confirm: "Are you sure?"}, class: 'cover-link' %></p>
+  </div>
+  <div class="cover-text text-center">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
 
-  </li>
-<% end %>
+<div class="container">
+  <div class="d-flex justify-content-end mt-3">
+    <%= link_to "Add a movie", new_list_bookmark_path(@list), class: 'btn btn-flat' %>
+  </div>
 
-<%= link_to "Add a movie", new_list_bookmark_path(@list)  %>
+  <div class="cards mt-3">
+    <% @list.movies.each do |movie| %>
+      <% bookmark = Bookmark.find_by(movie: movie, list: @list) %>
+
+      <div class="movie-card">
+        <%= image_tag movie.poster_url, alt: movie.title, class:'movie-img' %>
+        <div class="d-flex flex-column p-3">
+          <strong><%= movie.title %> <span class=" text-muted font-weight-normal">• <%= movie.rating %> <i class="fas fa-star fa-star-yellow"></i></span></strong>
+          <p class="text-muted small text-justify"><%= movie.overview %></p>
+          <div class="d-flex align-items-end justify-content-between ">
+            <div>
+              <small><i class="fas fa-quote-left flex-grow-1"></i> <%= bookmark.comment %></small>
+            </div>
+            <div>
+              <small><%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: {confirm: "Are you sure?"}, class: 'text-danger'  %></small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <h3>Reviews</h3>
+      <% if @list.reviews.empty? %>
+        <small><em class="text-muted">Be the first to post a review!</em></small>
+      <% end %>
+
+      <% @list.reviews.each do |review| %>
+        <div>
+          <% review.rating.times do %>
+            <i class="fas fa-star fa-star-yellow"></i>
+            <% end %>
+          <%= review.comment %>
+        </div>
+        <hr>
+        <% end %>
+    </div>
+
+    <div class="col-12">
+      <div class="bg-white rounder p-3">
+        <%= simple_form_for [@list, @review] do |f| %>
+          <%= f.input :comment, placeholder: 'Add your review here...' %>
+          <%= f.input :rating, as: :select, collection: (1..5), required: true, prompt: "What's your rating", id: "form_stars" %>
+          <%= f.submit class: 'btn btn-flat' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 

@@ -1,0 +1,22 @@
+.cover {
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(asset_path('cinema_cover.jpg'));
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 360px;
+  color: white;
+  text-align:center;
+  font-family: $headers-font;
+  font-weight:bolder;
+}
+
+.cover-text {
+  margin-top: 86px;
+}
+
+.cover-link {
+  text-decoration: none !important;
+  color: white !important;
+  font-family: $body-font;
+  font-weight:lighter !important;
+}
