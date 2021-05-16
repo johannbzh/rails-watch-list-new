@@ -1,6 +1,6 @@
 
 .btn-flat {
-  color: white;
+  color: white !important;
   padding: 8px 24px;
   border-radius: 4px;
   background: #1EDD88;
@@ -9,18 +9,27 @@
 
 .btn-flat:hover {
   background: #1BCB7F;
-  color: white;
+  color: white !important;
 }
 
-.btn-movie {
+
+
+
+.movie-tag {
+  color: white;
+  padding: 6px 16px;
+  border-radius: 4px;
+  background: #fcbf49;
+  transition: background 0.3s ease;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.btn-cancel {
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: #FDC048;
+  background: #6a757e;
   transition: background 0.3s ease;
-}
-
-.btn-movie:hover {
-  background: #FDC048;
-  color: white;
 }
