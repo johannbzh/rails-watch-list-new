@@ -9,9 +9,16 @@
 </div>
 
 <div class="container">
-  <div class="d-flex justify-content-end mt-3">
+
+  <div class="d-flex justify-content-between mt-3">
+    <% if @list.movies.count > 1 %>
+      <p class = "btn btn-movie"><%= @list.movies.count %> movies</p>
+    <% else %>
+      <p class = "btn btn-movie"><%= @list.movies.count %> movie</p>
+    <% end %>
     <%= link_to "Add a movie", new_list_bookmark_path(@list), class: 'btn btn-flat' %>
   </div>
+
 
   <div class="cards mt-3">
     <% @list.movies.each do |movie| %>

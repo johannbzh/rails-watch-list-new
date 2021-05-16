@@ -12,3 +12,15 @@
   color: white;
 }
 
+.btn-movie {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: #FDC048;
+  transition: background 0.3s ease;
+}
+
+.btn-movie:hover {
+  background: #FDC048;
+  color: white;
+}
